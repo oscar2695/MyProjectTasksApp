@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Project Admin</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="stylesheets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        background: url(http://ironsummitmedia.github.io/startbootstrap-creative/img/header.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+         -o-background-size: cover;
+        background-size: cover;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/main">Project Admin</a>
+        </div>
+        <center>
+            <div class="navbar-collapse collapse" id="navbar-main">
+                <form class="navbar-form navbar-right" id="frmLogOut" action="/logout" method="post">
+                    <div class="form-group">
+                        <b>{{user}}</b>
+                        <button type="submit" class="btn btn-default">Sign Out</button>
+                    </div>
+                </form>
+            </div>
+        </center>
+    </div>
+</div>
+    <!-- Page Content -->
+    <div class="col-lg-2"></div>
+
+    <div id="Contenedor"class="col-lg-8">
+        <h1 style="color: #ffffff;">Mis Proyectos</h1>
+        <!-- Page Content -->
+        <div class="table-responsive">
+        <table class="table" style="background-color: #ffffff">
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha Creación</th>
+                <th>Duracion en minutos</th>
+                <th>Eliminar</th>
+                <th>Ver Tareas</th>
+            </tr>
+
+            {% for project in projects %}
+            <tr>
+                <td>{{project.name}}</td>
+                <td>{{project.time}}</td>
+                <td>{{project.duration}}</td>
+                <td>
+                    <form id="frmDelProject" action="/delproject?pro={{project.name}}" method="post">
+                        <button type="submit" class="btn btn-default btn-sm">Eliminar</button>
+                    </form>
+                </td>
+                <td>
+                    <form id="frmViewTasks" action="/viewtasks?pro={{project.name}}" method="post">
+                        <button type="submit" class="btn btn-default btn-sm">Ver Tareas</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        </div>
+        <form id="frmInput" onSubmit="return addProject();">
+            <input type="submit" class="btn btn-default" value="Añadir Proyecto">
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="stylesheets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="stylesheets/js/bootstrap.min.js"></script>
+
+    <script src="stylesheets/js/formularios.js"></script>
+
+</body>
+
+</html>
